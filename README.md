@@ -27,25 +27,9 @@ Protecting Facial Privacy Against AIGC Models via Machine Unlearning
     <img width="1000" alt="teaser" src="assets/Teaser.png"/>
 </div>
 
-> **Abstract**: Text-to-image diffusion models are nothing but a revolution, allowing anyone, even without design skills, to create realistic images from simple text inputs. With powerful personalization tools like DreamBooth, they can generate images of a specific person just by learning from his/her few reference images. However, when misused, such a powerful and convenient tool can produce fake news or disturbing content targeting any individual victim, posing a severe negative social impact. In this paper, we explore a defense system called Anti-DreamBooth against such malicious use of DreamBooth. The system aims to add subtle noise perturbation to each user's image before publishing in order to disrupt the generation quality of any DreamBooth model trained on these perturbed images. We investigate a wide range of algorithms for perturbation optimization and extensively evaluate them on two facial datasets over various text-to-image model versions. Despite the complicated formulation of DreamBooth and Diffusion-based text-to-image models, our methods effectively defend users from the malicious use of those models. Their effectiveness withstands even adverse conditions, such as model or prompt/term mismatching between training and testing.
+> **Abstract**: The rapid rise of text-to-image (T2I) generative models, such as Stable Diffusion, has raised significant concerns over the misuse of personal images, particularly through unauthorized personalization. We introduced FCRASH, a novel defense method designed to protect facial privacy against misuse in AI-generated content(AIGC). FCRASH introduces imperceptible, face-aware perturbations into user photos to prevent unauthorized face synthesis by diffusion-based generative models such as DreamBooth. By targeting facial regions critical for identity recognition, FCRASH effectively disrupts identity learning without sacrificing image quality.
 
 **TLDR**: A security booth safeguards your privacy against malicious threats by preventing DreamBooth from synthesizing photo-realistic images of the individual target.
-
-Details of algorithms and experimental results can be found in [our following paper](https://arxiv.org/abs/2303.15433):
-```bibtex
-@InProceedings{le_etal2023antidreambooth,
-  title={Anti-DreamBooth: Protecting users from personalized text-to-image synthesis},
-  author={Thanh Van Le, Hao Phung, Thuan Hoang Nguyen, Quan Dao, Ngoc Tran and Anh Tran},
-  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-  year={2023}
-}
-```
-**Please CITE** our paper whenever this repository is used to help produce published results or incorporated into other software.
-
-**News**
-- [29th Oct, 2023] Add [evaluations](./evaluations) code
-- [02nd Aug, 2023] Provide download links for datasets in [Dataset preparation](#dataset-preparation)
-- [15th Aug, 2025] Add LoRA implementation
 
 ## Environment setup
 
@@ -53,9 +37,9 @@ Our code relies on the [diffusers](https://github.com/huggingface/diffusers) lib
 
 Install dependencies:
 ```shell
-cd Anti-DreamBooth
-conda create -n anti-dreambooth python=3.9  
-conda activate anti-dreambooth  
+cd FCRASH
+conda create -n fcrash python=3.9  
+conda activate fcrash  
 pip install -r requirements.txt  
 ```
 
@@ -83,7 +67,7 @@ Pretrained checkpoints of different Stable Diffusion versions can be **downloade
 
 Please put them in `./stable-diffusion/`. Note: Stable Diffusion version 2.1 is the default version in all of our experiments.
 
-> GPU allocation: All experiments are performed on a single NVIDIA 40GB A100 GPU.
+> GPU allocation: All experiments are performed on a single NVIDIA 40GB H800 GPU.
 
 ## Dataset preparation
 We have experimented on these two datasets:
@@ -141,4 +125,4 @@ python infer.py --model_path <path to DREAMBOOTH model>/checkpoint-1000 --output
 ```
 
 ## Contacts
-If you have any problems, please open an issue in this repository or send an email to [imthanhlv@gmail.com](mailto:imthanhlv@gmail.com).
+If you have any problems, please open an issue in this repository or send an email to [sylviachung.22@intl.zju.edu.cn](mailto:sylviachung.22@intl.zju.edu.cn).

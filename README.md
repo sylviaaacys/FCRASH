@@ -8,21 +8,6 @@ Protecting Facial Privacy Against AIGC Models via Machine Unlearning
 4. [Contacts](#contacts)
 
 # Official PyTorch implementation of "FCRASH: Protecting Facial Privacy Against AIGC Models via Machine Unlearning"
-<a href="https://anti-dreambooth.github.io/"><img src="https://img.shields.io/badge/Website-anti--dreambooth.github.io-blue?style=for-the-badge"></a>
-<a href="https://arxiv.org/abs/2303.15433"><img src="https://img.shields.io/badge/arxiv-2303.15433-red?style=for-the-badge"></a>
-<div align="center">
-  <a href="https://luvata.github.io/" target="_blank">Thanh&nbsp;Van&nbsp;Le</a> &emsp;
-  <a href="https://hao-pt.github.io/" target="_blank">Hao&nbsp;Phung</a> &emsp;
-  <a href="https://thuanz123.github.io/" target="_blank">Thuan&nbsp;Hoang&nbsp;Nguyen</a> &emsp;
-  <a href="https://quandao10.github.io/" target="_blank">Quan&nbsp;Dao</a> &emsp;
-  <a href="https://ngoctnq.github.io/" target="_blank">Ngoc&nbsp;Tran</a> &emsp;
-  <a href="https://sites.google.com/site/anhttranusc/" target="_blank">Anh&nbsp;Tran</a>
-  <br> <br>
-
-  <a href="https://www.vinai.io/">VinAI Research</a>
-</div>
-<br>
-
 <div align="center">
     <img width="1000" alt="teaser" src="assets/Teaser.png"/>
 </div>

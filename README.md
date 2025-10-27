@@ -28,8 +28,6 @@ conda activate fcrash
 pip install -r requirements.txt  
 ```
 
-Note that the LoRA implementation is tested on diffusers==0.23.1, accelerate==0.33.0, transformers==4.48.3.
-
 Pretrained checkpoints of different Stable Diffusion versions can be **downloaded** from provided links in the table below:
 <table style="width:100%">
   <tr>
@@ -50,29 +48,37 @@ Pretrained checkpoints of different Stable Diffusion versions can be **downloade
   </tr>
 </table>
 
-Please put them in `./stable-diffusion/`. Note: Stable Diffusion version 2.1 is the default version in all of our experiments.
+Please put them in `./stable-diffusion/`. We use Stable Diffusion version 2.1 in all of our experiments.
 
-> GPU allocation: All experiments are performed on a single NVIDIA 40GB H800 GPU.
+> GPU allocation: All experiments are performed on a NVIDIA 80GB H800 GPU.
+> You have **8 NVIDIA H800 GPUs**, each with **81,559 MiB ≈ 81.6 GB** of memory. So yes, your GPUs have **81 GB of VRAM each**, which is **plenty** for training large models like SD3.
 
 ## Dataset preparation
-We have experimented on these two datasets:
-- VGGFace2: contains around 3.31 million images of 9131 person identities. We only use subjects that have at least 15 images of resolution above $500 \times 500$.
-- CelebA-HQ: consists of 30,000 images at $1024 × 1024$ resolution. We
-use the annotated subset from [here](https://github.com/ndb796/CelebA-HQ-Face-Identity-and-Attributes-Recognition-PyTorch) that filters and groups images into 307 subjects with at least 15 images for each subject.
+For simple and convenient testing, we provided a simple dataset of several identities in './data/' to run.
 
-In this research, we select 50 identities from each dataset and carefully choose a subset of 12 images for each individual based on good pose and lighting. These examples are evenly divided into 3 subsets, including the reference clean set (set A), the target projecting set (set B), and an extra clean set for uncontrolled setting experiments (set C). These full split sets of each dataset are provided at [here](https://drive.google.com/drive/folders/1JX4IM6VMkkv4rER99atS4x4VGnoRNByV).
-
-For convenient testing, we have provided a split set of one subject in VGGFace2 at `./data/n000050/`.
+For each identity, there's 12 images evenly divided into 3 subsets, including the reference clean set (set A), the target projecting set (set B), and an extra clean set for uncontrolled setting experiments (set C). 
 
 ## How to run
-To defense Stable Diffusion version 2.1 (default) with untargeted ASPL, you can run
+To defense Stable Diffusion version 2.1 with the Anti-DreamBooth baseline, you can run
 ```bash
-bash scripts/attack_with_aspl.sh
+bash scripts/aspl.sh
 ```
 
-To defense Stable Diffusion version 2.1 with targeted ASPL, you can run
+To defense Stable Diffusion version 2.1 with the Error-minimizing diffusion attack algorithm (unaccelerated and accelerated version), you can run
 ```bash
-bash scripts/attack_with_targeted_aspl.sh
+bash scripts/aspl_min.sh
+bash scripts/unl_acc.sh
+```
+
+To defense Stable Diffusion version 2.1 with the Unlearnable/Error-minimizing vae attack algorithm, you can run
+```bash
+bash scripts/vae_attack.sh
+```
+
+With face-aware mechanism: 
+```bash
+bash scripts/face_aware.sh 
+bash scripts/face_aware_vae_attack.sh
 ```
 
 The same running procedure is applied for other supported algorithms:
@@ -82,7 +88,7 @@ The same running procedure is applied for other supported algorithms:
     <th>Bash script</th>
   </tr>
   <tr>
-    <td>E-ASPL</td>
+    <td>No defense</td>
     <td>scripts/attack_with_ensemble_aspl.sh</td>
   </tr>
   <tr>
@@ -109,5 +115,8 @@ Inference: generates examples with multiple-prompts
 python infer.py --model_path <path to DREAMBOOTH model>/checkpoint-1000 --output_dir ./test-infer/
 ```
 
+## Limitations
+The picture generated do not successfully learn the concept of the "sks" person, making us couldn't really determine if the attack is really successful or not. 
+
 ## Contacts
-If you have any problems, please open an issue in this repository or send an email to [sylviachung.22@intl.zju.edu.cn](mailto:sylviachung.22@intl.zju.edu.cn).
+Email: [sylviachung.22@intl.zju.edu.cn](mailto:sylviachung.22@intl.zju.edu.cn).

@@ -1,4 +1,4 @@
-# FCRASH
+# FCRASH (coming soon)
 Protecting Facial Privacy Against AIGC Models via Machine Unlearning
 
 ##### Table of contents
